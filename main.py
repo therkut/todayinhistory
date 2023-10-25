@@ -31,7 +31,7 @@ def tweekibot():
         ul_elements = soup.find_all('ul')
 
         if len(ul_elements) >= 2:
-            second_ul = ul_elements[-9]
+            second_ul = ul_elements[-8]
             list_items = second_ul.find_all('li')
 
             # Liste öğelerini tersine çevir
