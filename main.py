@@ -6,16 +6,10 @@ from requests_oauthlib import OAuth1Session
 from bs4 import BeautifulSoup
 from html import unescape
 
-# consumer_key = os.getenv('CONSUMER_KEY')
-# consumer_secret = os.getenv('CONSUMER_SECRET')
-# access_token = os.getenv('ACCESS_TOKEN')
-# access_token_secret = os.getenv('ACCESS_TOKEN_SECRET')
-
-
-consumer_key = "YgPHyN4TEATBMcCx8PrwEAxr6a"
-consumer_secret = "1Hla1uMKbutfcU664XnLPXdOc1MopP78TNYKgtCGWfYBJOgwPJ"
-access_token = "2249982802-sLdoBqk2skVS2DDtTkCRgacgOynGZ2sA6jm62Zo"
-access_token_secret = "DFAJPZYpNh4Srsisb6R6ttwumfu1rZNISJYRN2i8SqEtD"
+consumer_key = os.getenv('CONSUMER_KEY')
+consumer_secret = os.getenv('CONSUMER_SECRET')
+access_token = os.getenv('ACCESS_TOKEN')
+access_token_secret = os.getenv('ACCESS_TOKEN_SECRET')
 
 
 bugun = datetime.date.today()
