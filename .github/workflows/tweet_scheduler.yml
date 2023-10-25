@@ -2,7 +2,7 @@ name: Tweet Schedule
 
 on:
   schedule:
-    - cron: '51 22 * * *' # The workflow runs every day at 10:10 pm UTC time.
+    - cron: '54 22 * * *' # The workflow runs every day at 10:10 pm UTC time.
 
 jobs:
   tweet:
@@ -29,7 +29,7 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install requests datetime requests_oauthlib beautifulsoup4
+          pip install requests requests_oauthlib beautifulsoup4
 
       - name: Run Python Script
         run: python main.py
