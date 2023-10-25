@@ -2,7 +2,7 @@ name: Tweet Schedule
 
 on:
   schedule:
-    - cron: '50 22 * * *' # The workflow runs every day at 10:10 pm UTC time.
+    - cron: '49 22 * * *' # The workflow runs every day at 10:10 pm UTC time.
 
 jobs:
   tweet:
@@ -22,7 +22,7 @@ jobs:
           path: |
             ~/.cache/pip
             ~/.local/lib/python3.11.5/site-packages
-          key: ${{ runner.os }}-pip-${{ hashFiles('generate_quote_tweet.py') }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('main.py') }}
           restore-keys: |
             ${{ runner.os }}-pip-
             
@@ -32,7 +32,7 @@ jobs:
           pip install requests time datetime requests_oauthlib beautifulsoup4
 
       - name: Run Python Script
-        run: python generate_quote_tweet.py
+        run: python main.py
         env:
           CONSUMER_KEY: ${{ secrets.TWITTER_CONSUMER_KEY }}
           CONSUMER_SECRET: ${{ secrets.TWITTER_CONSUMER_SECRET }}
