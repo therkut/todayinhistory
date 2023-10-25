@@ -2,26 +2,26 @@ name: Tweet Schedule
 
 on:
   schedule:
-    - cron: '09 23 * * *' # The workflow runs every day at 10:10 pm UTC time.
+    - cron: '17 23 * * *' # The workflow runs every day at 08:08 am UTC time.
 
 jobs:
   tweet:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v2
         with:
-          python-version: '3.11.5'
+          python-version: '3.11' # Specify the Python version without the patch number (3.11 instead of 3.11.5)
 
       - name: Cache pip and downloaded packages
-        uses: actions/cache@v3
+        uses: actions/cache@v2
         with:
           path: |
             ~/.cache/pip
-            ~/.local/lib/python3.11.5/site-packages
+            ~/.local/lib/python3.11/site-packages # Adjust the Python version here
           key: ${{ runner.os }}-pip-${{ hashFiles('main.py') }}
           restore-keys: |
             ${{ runner.os }}-pip-
