@@ -1,4 +1,4 @@
-9name: Tweet Schedule
+name: Tweet Schedule
 
 on:
   schedule:
