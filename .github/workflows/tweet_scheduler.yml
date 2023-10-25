@@ -9,19 +9,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
-          python-version: '3.11' # Specify the Python version without the patch number (3.11 instead of 3.11.5)
-
+          python-version: '3.11.5'
       - name: Cache pip and downloaded packages
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ~/.cache/pip
-            ~/.local/lib/python3.11/site-packages # Adjust the Python version here
+            ~/.local/lib/python3.11.5/site-packages # Adjust the Python version here
           key: ${{ runner.os }}-pip-${{ hashFiles('main.py') }}
           restore-keys: |
             ${{ runner.os }}-pip-
