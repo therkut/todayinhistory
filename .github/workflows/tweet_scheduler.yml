@@ -2,7 +2,7 @@ name: Tweet Schedule
 
 on:
   schedule:
-    - cron: '54 22 * * *' # The workflow runs every day at 10:10 pm UTC time.
+    - cron: '09 23 * * *' # The workflow runs every day at 10:10 pm UTC time.
 
 jobs:
   tweet:
