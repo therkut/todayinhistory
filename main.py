@@ -44,6 +44,7 @@ def get_wikipedia_data():
         td_tag = soup.find('td', {'id': TD_ELEMENT_ID})
         li_tags = td_tag.find_all('li')
         tweet_list = [strip_tags(li.get_text()) for li in li_tags[:5]]
+        tweet_list.reverse()  # Reverse the tweet_list
         return tweet_list
     except requests.exceptions.RequestException as e:
         logging.error("An error occurred while fetching data from Wikipedia: %s", str(e))
