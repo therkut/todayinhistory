@@ -5,11 +5,10 @@ from requests_oauthlib import OAuth1Session
 from bs4 import BeautifulSoup
 from html import unescape
 import time
-import locale
 import logging
 
 # Constants
-WIKIPEDIA_URL = 'https://tr.wikipedia.org/wiki/Anasayfa'
+WIKIPEDIA_URL = 'https://tr.wikipedia.org/wiki/Anasayfa'  # Turkish Wikipedia homepage URL
 TWITTER_API_URL = 'https://api.twitter.com/2/tweets'
 WAIT_INTERVAL = 40  # 40-second interval
 TD_ELEMENT_ID = 'mp-itn'  # ID of the td element
@@ -25,13 +24,12 @@ access_token_secret = os.getenv('ACCESS_TOKEN_SECRET')
 
 oauth = OAuth1Session(consumer_key, client_secret=consumer_secret, resource_owner_key=access_token, resource_owner_secret=access_token_secret)
 
-# Set Turkish locale
-locale.setlocale(locale.LC_TIME, 'tr_TR.UTF-8')
-
 # Get today's date and create a hashtag with Turkish date format
 today = datetime.date.today()
-formatted_date = today.strftime("%d %B")  # Turkish date format
-hashtag = f"{formatted_date} > #Bugün #Tarih #Güncel #Bilgi #TarihteBugün"
+months = ["", "Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"]
+this_month = months[today.month]
+this_day = today.day
+hashtag = f"{this_day} {this_month} > #Bugün #Tarih #Güncel #Bilgi #TarihteBugün"
 
 # Function to strip HTML tags from text
 def strip_tags(html):
@@ -42,14 +40,9 @@ def get_wikipedia_data():
     try:
         response = requests.get(WIKIPEDIA_URL)
         response.raise_for_status()  # Raise an exception for 4xx and 5xx status codes
-        wiki_page = response.text
-        soup = BeautifulSoup(wiki_page, 'html.parser')
-
+        soup = BeautifulSoup(response.text, 'html.parser')
         td_tag = soup.find('td', {'id': TD_ELEMENT_ID})
-        ul_tag = td_tag.find('ul')
-        li_tags = ul_tag.find_all('li')
-        li_tags.reverse()
-
+        li_tags = td_tag.find_all('li')
         tweet_list = [strip_tags(li.get_text()) for li in li_tags[:5]]
         return tweet_list
     except requests.exceptions.RequestException as e:
