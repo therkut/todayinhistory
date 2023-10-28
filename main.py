@@ -12,7 +12,6 @@ TWITTER_API_URL = 'https://api.twitter.com/2/tweets'
 WAIT_INTERVAL = 40  # 40-second interval
 TD_ELEMENT_ID = 'mp-itn'  # ID of the td element
 
-
 # Authenticate with Twitter API
 consumer_key = os.getenv('CONSUMER_KEY')
 consumer_secret = os.getenv('CONSUMER_SECRET')
