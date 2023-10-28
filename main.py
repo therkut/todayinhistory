@@ -7,10 +7,11 @@ from bs4 import BeautifulSoup
 from requests_oauthlib import OAuth1Session
 
 # Constants
-WIKIPEDIA_URL = 'https://tr.wikipedia.org/wiki/Anasayfa'  # Turkish Wikipedia homepage URL
+WIKIPEDIA_URL = 'https://tr.wikipedia.org/wiki/Anasayfa'
 TWITTER_API_URL = 'https://api.twitter.com/2/tweets'
 WAIT_INTERVAL = 40  # 40-second interval
 TD_ELEMENT_ID = 'mp-itn'  # ID of the td element
+
 
 # Authenticate with Twitter API
 consumer_key = os.getenv('CONSUMER_KEY')
@@ -36,11 +37,15 @@ def get_wikipedia_data():
     try:
         response = requests.get(WIKIPEDIA_URL)
         response.raise_for_status()  # Raise an exception for 4xx and 5xx status codes
-        soup = BeautifulSoup(response.text, 'html.parser')
+        wiki_page = response.text
+        soup = BeautifulSoup(wiki_page, 'html.parser')
+
         td_tag = soup.find('td', {'id': TD_ELEMENT_ID})
-        li_tags = td_tag.find_all('li')
+        ul_tag = td_tag.find('ul')
+        li_tags = ul_tag.find_all('li')
+        li_tags.reverse()
+
         tweet_list = [strip_tags(li.get_text()) for li in li_tags[:5]]
-        tweet_list.reverse()  # Reverse the tweet_list
         return tweet_list
     except requests.exceptions.RequestException as e:
         print("An error occurred while fetching data from Wikipedia: %s", str(e))
