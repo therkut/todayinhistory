@@ -5,16 +5,12 @@ from requests_oauthlib import OAuth1Session
 from bs4 import BeautifulSoup
 from html import unescape
 import time
-import logging
 
 # Constants
 WIKIPEDIA_URL = 'https://tr.wikipedia.org/wiki/Anasayfa'  # Turkish Wikipedia homepage URL
 TWITTER_API_URL = 'https://api.twitter.com/2/tweets'
 WAIT_INTERVAL = 40  # 40-second interval
 TD_ELEMENT_ID = 'mp-itn'  # ID of the td element
-
-# Set up logging
-logging.basicConfig(filename='twitter_bot.log', level=logging.INFO)
 
 # Authenticate with Twitter API
 consumer_key = os.getenv('CONSUMER_KEY')
@@ -47,7 +43,7 @@ def get_wikipedia_data():
         tweet_list.reverse()  # Reverse the tweet_list
         return tweet_list
     except requests.exceptions.RequestException as e:
-        logging.error("An error occurred while fetching data from Wikipedia: %s", str(e))
+        print("An error occurred while fetching data from Wikipedia: %s", str(e))
         return []
 
 # Function to post a tweet
@@ -56,9 +52,9 @@ def post_tweet(tweet_text, oauth):
         payload = {"text": tweet_text}
         response = oauth.post(TWITTER_API_URL, json=payload)
         response.raise_for_status()
-        logging.info("Tweet sent successfully: %s", tweet_text)
+        print("Tweet sent successfully: %s", tweet_text)
     except Exception as e:
-        logging.error("Request returned an error: {} {}".format(response.status_code, response.text))
+        print("Request returned an error: {} {}".format(response.status_code, response.text))
 
 # Main function
 def main():
