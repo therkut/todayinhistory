@@ -1,88 +1,88 @@
-# Wikipedia'dan Günlük Tweetler Oluşturma
+# Generating Daily Tweets from Wikipedia
 
-Bu proje, Wikipedia'nın güncellemelerini alır ve Twitter üzerinde paylaşmak için kullanır. Aşağıda kodun nasıl çalıştığını ve nasıl yapılandırılacağını bulabilirsiniz.
+This project retrieves updates from Wikipedia and utilizes them for sharing on Twitter. Below, you can find how the code works and how to configure it.
 
-## Adımlar
+## Steps
 
-1. **Gerekli Kütüphaneleri İndirme:**
+1. **Downloading Required Libraries:**
 
-   İlk adım olarak, aşağıdaki Python kütüphanelerini projenize dahil edin. Bu kütüphaneler, veri çekme, Twitter'a tweet gönderme ve veri işleme işlemleri için gereklidir.
+   As the first step, include the following Python libraries in your project. These libraries are essential for data retrieval, posting tweets to Twitter, and data processing.
 
-   - `os`: Dosya işlemleri ve çevre değişkenlerine erişim için kullanılır.
-   - `time`: Zaman gecikmeleri için kullanılır.
-   - `datetime`: Tarih ve saat işlemleri için kullanılır.
-   - `requests`: HTTP istekleri yapmak için kullanılır.
-   - `html`: HTML etiketlerini temizlemek için kullanılır.
-   - `bs4` (Beautiful Soup): HTML belgelerini analiz etmek ve içeriklerini çıkarmak için kullanılır.
-   - `requests_oauthlib`: OAuth kimlik doğrulama ile Twitter API ile iletişim kurmak için kullanılır.
+   - `os`: Used for file operations and accessing environment variables.
+   - `time`: Used for time delays.
+   - `datetime`: Used for date and time operations.
+   - `requests`: Used for making HTTP requests.
+   - `html`: Used for cleaning HTML tags.
+   - `bs4` (Beautiful Soup): Used for parsing and extracting content from HTML documents.
+   - `requests_oauthlib`: Used for communication with the Twitter API using OAuth authentication.
 
-2. **Sabitlerin Tanımlanması:**
+2. **Defining Constants:**
 
-   Proje için kullanılan sabit değerleri belirleyin. Bu sabitler şunlardır:
+   Define the constant values used in the project. These constants include:
 
-   - `WIKIPEDIA_URL`: Wikipedia'dan veri çekmek için kullanılan URL.
-   - `TWITTER_API_URL`: Twitter API'sine gönderilecek isteklerin yapıldığı URL.
-   - `WAIT_INTERVAL`: Her tweet arasındaki bekleme süresi (saniye cinsinden).
-   - `TD_ELEMENT_ID`: Wikipedia sayfasındaki güncellemeleri içeren `td` elementinin ID'si.
+   - `WIKIPEDIA_URL`: URL used for fetching data from Wikipedia.
+   - `TWITTER_API_URL`: URL for making requests to the Twitter API.
+   - `WAIT_INTERVAL`: The wait time between each tweet (in seconds).
+   - `TD_ELEMENT_ID`: The ID of the `td` element on the Wikipedia page that contains updates.
 
-3. **Twitter API Kimlik Doğrulaması:**
+3. **Twitter API Authentication:**
 
-   Twitter API ile iletişim kurabilmek için kimlik doğrulaması yapmanız gerekir. Aşağıdaki bilgileri sağlayarak kimlik doğrulaması yapın:
+   To communicate with the Twitter API, you need to authenticate. Authenticate by providing the following information:
 
-   - `consumer_key`: Twitter API tüketici anahtarı.
-   - `consumer_secret`: Twitter API tüketici sırrı.
-   - `access_token`: Twitter API erişim anahtarı.
-   - `access_token_secret`: Twitter API erişim sırrı.
+   - `consumer_key`: Twitter API consumer key.
+   - `consumer_secret`: Twitter API consumer secret.
+   - `access_token`: Twitter API access token.
+   - `access_token_secret`: Twitter API access token secret.
 
-4. **Bugünkü Tarihi Alın ve Hashtag Oluşturun:**
+4. **Get Today's Date and Create a Hashtag:**
 
-   Kod, bugünkü tarihi alır ve Türkçe tarih formatında bir hashtag oluşturur.
+   The code obtains today's date and creates a hashtag in the Turkish date format.
 
-5. **HTML Etiketlerini Temizleme İşlevi Oluşturun:**
+5. **Create a Function for Stripping HTML Tags:**
 
-   `strip_tags` adlı bir işlev tanımlanır. Bu işlev, HTML etiketlerini temizler ve içeriği düz metin haline getirir.
+   Define a function called `strip_tags`. This function removes HTML tags and converts the content into plain text.
 
-6. **Wikipedia Verilerini Çekme:**
+6. **Retrieve Wikipedia Data:**
 
-   `get_wikipedia_data` işlevi, Wikipedia'dan verileri çeker. Bu işlev, Wikipedia sayfasındaki güncellemeleri alır ve temizler.
+   The `get_wikipedia_data` function retrieves data from Wikipedia. This function fetches and cleans updates from the Wikipedia page.
 
-7. **Tweet Gönderme İşlevi Oluşturun:**
+7. **Create a Tweet Posting Function:**
 
-   `post_tweet` adlı işlev, belirtilen tweet metnini Twitter'a gönderir. Tweet gönderme işlevi, Twitter API ile iletişim kurar ve gönderilen tweetin durumunu kontrol eder.
+   The function named `post_tweet` sends the specified tweet text to Twitter. The tweet posting function communicates with the Twitter API and checks the status of the sent tweet.
 
-8. **Ana İşlevi Oluşturun:**
+8. **Create the Main Function:**
 
-   Ana işlev olan `main` işlevi, Wikipedia verilerini alır, tweetler oluşturur ve Twitter'a gönderir. Belirtilen bekleme süresi ile her tweet arasında bir gecikme sağlar.
+   The main function, `main`, retrieves Wikipedia data, generates tweets, and posts them to Twitter. It provides a delay with the specified waiting time between each tweet.
 
-9. **Kodu Çalıştırın:**
+9. **Run the Code:**
 
-   Kodu çalıştırmak için, `if __name__ == '__main__':` bloğunu kullanarak `main` işlevini çağırın. Bu, kodun otomatik olarak çalıştırılmasını sağlar.
+   To run the code, call the `main` function using the `if __name__ == '__main__':` block. This allows the code to run automatically.
 
-## Kullanım
+## Usage
 
-Bu proje, günlük güncellemeleri otomatik olarak almak ve Twitter üzerinde paylaşmak için kullanılabilir. Kullanmadan önce, Twitter API kimlik bilgilerinizi ve diğer gereksinimlerinizi yapılandırmanız gerekecektir. Projeyi çalıştırmak için aşağıdaki adımları takip edin:
+This project can be used to automatically fetch daily updates and share them on Twitter. Before using it, you'll need to configure your Twitter API credentials and other requirements. Follow the steps below to run the project:
 
-1. Gerekli kütüphaneleri yükleyin:
+1. Install the required libraries:
 
    ```bash
    pip install requests beautifulsoup4 requests_oauthlib
    ```
 
-2. Twitter API kimlik bilgilerinizi belirleyin:
+2. Set your Twitter API credentials:
 
    - `CONSUMER_KEY`
    - `CONSUMER_SECRET`
    - `ACCESS_TOKEN`
    - `ACCESS_TOKEN_SECRET`
 
-3. Kodu çalıştırın:
+3. Run the code:
 
    ```bash
    python main.py
    ```
 
-Kod, Wikipedia'dan güncellemeleri alacak ve belirtilen bekleme süresi ile Twitter üzerinde paylaşacaktır.
+The code will fetch updates from Wikipedia and share them on Twitter with the specified waiting interval.
 
-## Lisans
+## License
 
-Bu proje, MIT Lisansı altında lisanslanmıştır. Daha fazla bilgi için LICENSE dosyasına başvurun.
+This project is licensed under the MIT License. For more information, refer to the LICENSE file.
