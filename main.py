@@ -1,10 +1,10 @@
 import os
-import requests
-import datetime
-from requests_oauthlib import OAuth1Session
-from bs4 import BeautifulSoup
-from html import unescape
 import time
+import datetime
+import requests
+from html import unescape
+from bs4 import BeautifulSoup
+from requests_oauthlib import OAuth1Session
 
 # Constants
 WIKIPEDIA_URL = 'https://tr.wikipedia.org/wiki/Anasayfa'  # Turkish Wikipedia homepage URL
