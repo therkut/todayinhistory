@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 from requests_oauthlib import OAuth1Session
 
 # Constants
-WIKIPEDIA_URL = 'https://tr.wikipedia.org/wiki/Anasayfa'
+WIKIPEDIA_URL = 'https://en.wikipedia.org/wiki/Main_Page'
 TWITTER_API_URL = 'https://api.twitter.com/2/tweets'
 WAIT_INTERVAL = 40  # 40-second interval
 TD_ELEMENT_ID = 'mp-itn'  # ID of the td element
@@ -21,11 +21,10 @@ access_token_secret = os.getenv('ACCESS_TOKEN_SECRET')
 
 # Get today's date and create a hashtag with Turkish date format
 today = datetime.date.today()
-months = ["", "Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"]
+months = ["", "Ocak - January", "Şubat - February", "Mart - March", "Nisan - April", "Mayıs - May", "Haziran - June", "Temmuz - July", "Ağustos - August", "Eylül - September", "Ekim - October", "Kasım - November", "Aralık - December"]
 this_month = months[today.month]
 this_day = today.day
-hashtag = f"{this_day} {this_month} > #Bugün #Tarih #Güncel #Bilgi #TarihteBugün"
-
+hashtag = f"{this_day} {this_month} > #Today #Date #Current #Information #OnThisDay"
 
 # Authenticate with Twitter API
 oauth = OAuth1Session(consumer_key, client_secret=consumer_secret, resource_owner_key=access_token, resource_owner_secret=access_token_secret)
